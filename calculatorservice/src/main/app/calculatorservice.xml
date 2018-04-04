@@ -21,6 +21,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             </when>
             <when expression="#[flowVars.operation=='Subtraction']">
                 <set-payload value="#[Integer.parseInt(flowVars.input1) - Integer.parseInt(flowVars.input2)]" doc:name="Subtraction"/>
+                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </when>
             <when expression="#[flowVars.operation=='Multiplication']">
                 <set-payload value="#[Integer.parseInt(flowVars.input1) *  Integer.parseInt(flowVars.input2)]" doc:name="Multiplication"/>
