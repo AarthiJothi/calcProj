@@ -29,6 +29,7 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
             </when>
             <otherwise>
                 <set-payload value="#[Integer.parseInt(flowVars.input1) / Integer.parseInt(flowVars.input2)]" doc:name="Division"/>
+                <logger message="#[payload]" level="INFO" doc:name="Logger"/>
             </otherwise>
         </choice>
         <byte-array-to-string-transformer doc:name="Byte Array to String"/>
