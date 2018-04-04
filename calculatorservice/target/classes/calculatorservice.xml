@@ -10,15 +10,13 @@ http://www.mulesoft.org/schema/mule/ee/tracking http://www.mulesoft.org/schema/m
     <http:listener-config name="HTTP_Listener_Configuration" host="0.0.0.0" port="${http.port}" doc:name="HTTP Listener Configuration"/>
     <flow name="CalculatorFlow">
         <http:listener config-ref="HTTP_Listener_Configuration" path="/calc" allowedMethods="POST" doc:name="HTTP"/>
-        <message-properties-transformer scope="invocation" doc:name="Message Properties">
+        <message-properties-transformer scope="invocation" doc:name="Input_Value">
             <add-message-property key="input1" value="#[xpath3('Calc/input1')]"/>
             <add-message-property key="input2" value="#[xpath3('Calc/input2')]"/>
             <add-message-property key="operation" value="#[xpath3('Calc/Operation')]"/>
         </message-properties-transformer>
-        <logger message="#[flowVars.input1]" level="INFO" doc:name="Logger"/>
-        <choice doc:name="Choice">
+        <choice doc:name="operation">
             <when expression="#[flowVars.operation=='Addition']">
-                <logger message="#[flowVars.input2]" level="INFO" doc:name="Logger"/>
                 <set-payload value="#[Integer.parseInt(flowVars.input1) + Integer.parseInt(flowVars.input2)]" doc:name="Addition"/>
             </when>
             <when expression="#[flowVars.operation=='Subtraction']">
